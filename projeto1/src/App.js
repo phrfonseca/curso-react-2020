@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+
+  state = {
+    nome : ""
+  }
+
+  modificarNome = (event) => {
+     this.setState(
+       {nome : event.target.value}
+     )
+  }
+
+  criarComboBox = () => {
+    const opcoes = ["Paulo", "João", "Maria", "Betty", "Marta"]
+    const cmbOpcoes = opcoes.map( opcoes => <option>{opcoes}</option>)
+    return (
+      <select> {cmbOpcoes} </select>
+    )
+  }
+
+  render(){
+    const MeuComboBox = () => this.criarComboBox();
+
+    return (
+      <>
+         <h3>Digite um nome</h3>
+         <input type="text" value={this.state.nome} onChange={this.modificarNome} />
+         <h1>Olá Sr. {this.state.nome} seja bem-vindo!</h1>
+         <MeuComboBox />
+      
+      </>
+    )
+  }
+
 }
 
 export default App;
